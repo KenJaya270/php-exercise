@@ -1,26 +1,17 @@
 <?php
-$connect = mysqli_connect("localhost", "root", "", "phpdasar");
-
+require 'functions.php';
 if (isset($_POST["submit"])) {
-    //ambil data dari tiap element form
-    $nama = $_POST["nama"];
-    $nrp = $_POST["nrp"];
-    $email = $_POST["email"];
-    $jurusan = $_POST["jurusan"];
-    $gambar = $_POST["gambar"];
-
-    //query insert data
-    $query = "INSERT INTO mahasiswa VALUES(null, '$nama', '$nrp', '$email', '$jurusan', '$gambar')";
-
-    mysqli_query($connect, $query);
-
     //cek apakah data berhasil ditambahkan atau tidak
-
-    if (mysqli_affected_rows($connect) > 0) {
-        echo "Berhasil";
+    if (tambah($_POST) > 0) {
+        echo "<script>
+        alert('Data berhasil ditambahkan')
+        document.location.href = 'index.php';
+        </script>";
     } else {
-        echo "gagal <br>";
-        echo mysqli_error($connect);
+        echo "<script>
+        alert('Data gagal ditambahkan')
+        document.location.href = 'index.php';
+        </script>";
     }
 }
 ?>
@@ -41,7 +32,7 @@ if (isset($_POST["submit"])) {
         <ul>
             <li>
                 <label for="nrp">NRP:</label>
-                <input type="text" name="nrp" id="nrp">
+                <input type="text" name="nrp" id="nrp" required>
             </li>
             <li>
                 <label for="nama">NAMA:</label>
