@@ -1,6 +1,21 @@
 $(document).ready(function(){
-    let keyword = document.getElementById('keyword');
-    keyword.addEventListener('keypress', function(){
-        console.log('ok');
+    //hilangkan tombol cari
+    $('#tombolCari').hide();
+
+
+    //event ketika keyword ditulis
+    $('#keyword').on('keypress', function(){
+        //munculkan icon loading
+        $('.loader').show();
+
+        //ajax menggunakan load
+        // $('#container').load('ajax/mahasiswa.php?keyword='+$('#keyword').val());
+
+        //$.get()
+
+        $.get('ajax/mahasiswa.php?keyword='+$('#keyword').val(), function(data){
+            $('#container').html(data);
+            $('.loader').hide();
+        })
     })
 })
